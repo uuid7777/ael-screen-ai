@@ -1,0 +1,9 @@
+API规范
+
+/auth/login
+/auth/apple
+/translate
+/ocr
+/history
+/favorites
+/subscriptions

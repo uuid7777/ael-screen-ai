@@ -1,0 +1,4 @@
+iOS技术架构
+
+SwiftUI + MVVM + Vision OCR + App Intents + Shortcuts + Supabase。
+重点：通过快捷指令、背部轻点、Action Button触发翻译流程。

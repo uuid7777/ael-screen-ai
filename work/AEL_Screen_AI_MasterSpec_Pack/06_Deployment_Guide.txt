@@ -1,0 +1,3 @@
+部署文档
+
+Supabase配置、FastAPI部署、Apple登录配置、TestFlight发布。

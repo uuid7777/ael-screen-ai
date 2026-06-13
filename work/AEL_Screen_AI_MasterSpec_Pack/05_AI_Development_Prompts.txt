@@ -1,0 +1,3 @@
+Claude/Gemini/Cursor开发提示词
+
+按SwiftUI、MVVM、Supabase规范生成完整项目。

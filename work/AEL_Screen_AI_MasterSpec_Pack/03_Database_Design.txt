@@ -1,0 +1,3 @@
+数据库设计
+
+users, translations, favorites, subscriptions, settings, logs 等表结构设计。
