@@ -1,9 +1,9 @@
-name: Build AEL Screen AI APK
+﻿name: Build AEL Screen AI APK
 
 on:
-  workflow_dispatch:  # Manual trigger
+  workflow_dispatch:
   push:
-    branches: [ main ]
+    branches: [ main, master ]
 
 jobs:
   build:
@@ -12,6 +12,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
 
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
@@ -34,11 +40,12 @@ jobs:
           path: ael_screen_ai/build/app/outputs/flutter-apk/*.apk
           retention-days: 30
 
-      - name: Build App Bundle (optional)
+      - name: Build App Bundle (AAB)
         working-directory: ael_screen_ai
         run: flutter build appbundle --release
 
       - name: Upload App Bundle
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: ael-screen-ai-aab
