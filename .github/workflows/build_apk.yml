@@ -25,33 +25,13 @@ jobs:
           channel: stable
           flutter-version: 3.27.4
 
-      - name: Regenerate Android project
-        working-directory: ael_screen_ai
-        run: |
-          # Save custom Kotlin files
-          mkdir -p /tmp/custom_kt
-          cp -r lib /tmp/custom_kt/
-          cp pubspec.yaml /tmp/custom_kt/
-          if [ -d android/app/src/main/kotlin/com/ael/screenai ]; then
-            mkdir -p /tmp/custom_kt/kotlin
-            cp -r android/app/src/main/kotlin/com/ael/screenai /tmp/custom_kt/kotlin/
-          fi
-          # Delete and regenerate android
-          rm -rf android
-          flutter create --platforms android --project-name ael_screen_ai --org com.ael .
-          # Restore custom Kotlin files
-          cp /tmp/custom_kt/pubspec.yaml .
-          if [ -d /tmp/custom_kt/kotlin ]; then
-            mkdir -p android/app/src/main/kotlin/com/ael
-            cp -r /tmp/custom_kt/kotlin/screenai android/app/src/main/kotlin/com/ael/
-          fi
-          flutter pub get
-          # Delete .flutter-plugins (triggers v1 check)
-          rm -f .flutter-plugins
-
       - name: Build APK
-        working-directory: ael_screen_ai
-        run: flutter build apk --release --split-per-abi
+        run: |
+          cd ael_screen_ai
+          flutter pub get
+          rm -f .flutter-plugins
+          rm -f android/app/src/debug/AndroidManifest.xml
+          flutter build apk --release --split-per-abi
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
